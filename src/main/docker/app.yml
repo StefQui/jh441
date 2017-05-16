@@ -1,0 +1,19 @@
+version: '2'
+services:
+    jh441-app:
+        image: jh441
+        environment:
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - SPRING_DATASOURCE_URL=jdbc:mysql://jh441-mysql:3306/jh441?useUnicode=true&characterEncoding=utf8&useSSL=false
+            - JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
+            - SPRING_DATA_ELASTICSEARCH_CLUSTER_NODES=jh441-elasticsearch:9300
+        ports:
+            - 8080:8080
+    jh441-mysql:
+        extends:
+            file: mysql.yml
+            service: jh441-mysql
+    jh441-elasticsearch:
+        extends:
+            file: elasticsearch.yml
+            service: jh441-elasticsearch
